@@ -21,15 +21,16 @@ class Owner(Base):
 
 class Device(Base):
     __tablename__ = 'devices'
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False, unique=True)
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
+    is_active = Column(Boolean, nullable=False, default=False)
     owner_id = Column(Integer, ForeignKey('owners.id'))
-
     owner = relationship("Owner", back_populates="devices")
     records = relationship("Record", back_populates="device")
+
+
 
 
 class Record(Base):
